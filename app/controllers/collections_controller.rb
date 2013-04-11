@@ -21,4 +21,19 @@ class CollectionsController < ApplicationController
   def show
     @collection = Collection.find(params[:id])
   end
+
+  def edit
+    @collection = Collection.find(params[:id])
+  end
+
+  def update
+    @collection = Collection.find(params[:id])
+    if @collection.update_attributes(params[:collection])
+      flash[:notice] = "Collection has been updated."
+      redirect_to @collection
+    else
+      flash[:alert] = "Collection has not been updated."
+      render "edit"
+    end
+  end
 end
