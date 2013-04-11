@@ -1,12 +1,3 @@
-<h1><%= @collection.name %></h1>
-<div>
-  <% if @current_total %>
-    total: <%= @current_total %><br />
-  <% else %>
-    start tracking by adding a total
-  <% end %>
-</div>
-
 <%= link_to "Edit Collection",
             edit_collection_path(@collection) %>
 
@@ -15,16 +6,39 @@
             method: :delete,
             confirm: "Delete this Collection?" %>
 
-<%= link_to "Update Total",
-            new_collection_entry_path(@collection) %>
+<h1><%= @collection.name %></h1>
+<div>
+  <% if @current_total %>
+    <h3>Total: <%= @current_total %></h3><br />
+  <% else %>
+    start tracking by adding a total
+  <% end %>
+</div>
+
+<div>
+</div>
 
 <%= form_for [@collection, @entry] do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :total %>
+    <%= f.label :total, "Update Total" %>
     <%= f.text_field :total %>
   </p>
 
   <%= f.submit "Update Total" %>
 <% end %>
+
+<br />
+
+<div>
+  <% if @current_total %>
+    <h3>Entries</h3>
+    <% 0.upto(@last_entry_index) do |i| %>
+      <div>
+        <%= @entries[i].total %>
+      </div>
+    <% end %>
+
+  <% end %>
+</div>

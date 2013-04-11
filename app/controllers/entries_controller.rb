@@ -6,8 +6,12 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @current_total = (@collection.entries.present?) ?
-                      @collection.entries.last.total : nil
+    @current_total = nil
+    if @collection.entries.present?
+      @current_total = @collection.entries.last.total
+      @entries = @collection.entries
+      @last_entry_index = @entries.count - 1
+    end
 
     @entry = @collection.entries.build(params[:entry])
     if @entry.save

@@ -23,8 +23,14 @@ class CollectionsController < ApplicationController
   end
 
   def show
-    @current_total = (@collection.entries.present?) ?
-                      @collection.entries.last.total : nil
+    @current_total = nil
+    if @collection.entries.present?
+      @current_total = @collection.entries.last.total
+      @entries = @collection.entries
+      #storing now due to build incrementing this total below
+      @last_entry_index = @entries.count - 1
+    end
+
     @entry = @collection.entries.build
   end
 
