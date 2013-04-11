@@ -36,4 +36,11 @@ class CollectionsController < ApplicationController
       render "edit"
     end
   end
+
+  def destroy
+    @collection = Collection.find(params[:id])
+    @collection.destroy
+    flash[:notice] = "Collection has been deleted."
+    redirect_to collections_path
+  end
 end
