@@ -23,6 +23,9 @@ class CollectionsController < ApplicationController
   end
 
   def show
+    @current_total = (@collection.entries.present?) ?
+                      @collection.entries.last.total : nil
+    @entry = @collection.entries.build
   end
 
   def edit

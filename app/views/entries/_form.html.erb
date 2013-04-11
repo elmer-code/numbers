@@ -1,0 +1,10 @@
+<%= form_for [@collection, @entry] do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :total %>
+    <%= f.text_field :total %>
+  </p>
+
+  <%= f.submit "Update Total" %>
+<% end %>

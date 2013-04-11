@@ -2,7 +2,9 @@ Number::Application.routes.draw do
 
   root to: "collections#index"
 
-  resources :collections
+  resources :collections do
+    resources :entries
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
