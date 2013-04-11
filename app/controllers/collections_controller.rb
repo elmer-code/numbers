@@ -1,4 +1,8 @@
 class CollectionsController < ApplicationController
+  before_filter :find_collection, only: [:show, :edit, :update, :destroy]
+
+
+
   def index
     @collections = Collection.all
   end
@@ -19,15 +23,12 @@ class CollectionsController < ApplicationController
   end
 
   def show
-    @collection = Collection.find(params[:id])
   end
 
   def edit
-    @collection = Collection.find(params[:id])
   end
 
   def update
-    @collection = Collection.find(params[:id])
     if @collection.update_attributes(params[:collection])
       flash[:notice] = "Collection has been updated."
       redirect_to @collection
@@ -38,9 +39,17 @@ class CollectionsController < ApplicationController
   end
 
   def destroy
-    @collection = Collection.find(params[:id])
     @collection.destroy
     flash[:notice] = "Collection has been deleted."
     redirect_to collections_path
+  end
+
+  private
+
+  def find_collection
+    @collection = Collection.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "Collection not found."
+      redirect_to collections_path
   end
 end
