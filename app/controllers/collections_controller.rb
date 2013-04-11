@@ -12,7 +12,8 @@ class CollectionsController < ApplicationController
       flash[:notice] = "Collection has been created."
       redirect_to @collection
     else
-      # later
+      flash[:alert] = "Collection has not been created."
+      render 'new'
     end
   end
 
