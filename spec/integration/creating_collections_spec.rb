@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "Creating Collections" do
+feature "Creating Collections - " do
   before do
     visit '/'
     click_link 'New Collection'
