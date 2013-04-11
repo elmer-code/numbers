@@ -1,4 +1,9 @@
 Number::Application.routes.draw do
+
+  root to: "collections#index"
+
+  resources :collections
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
