@@ -23,14 +23,7 @@ class CollectionsController < ApplicationController
   end
 
   def show
-    @current_total = nil
-    if @collection.entries.present?
-      @current_total = @collection.entries.last.total
-      @entries = @collection.entries
-      #storing now due to build incrementing this total below
-      @last_entry_index = @entries.count - 1
-    end
-
+    @entries = @collection.entries
     @entry = @collection.entries.build
   end
 
@@ -38,12 +31,23 @@ class CollectionsController < ApplicationController
   end
 
   def update
-    if @collection.update_attributes(params[:collection])
-      flash[:notice] = "Collection has been updated."
-      redirect_to @collection
+    if params[:commit] == "Add Nested Collection"
+      @new_nested_collection = @collection.children.build(params[:collection])
+      if @new_nested_collection.save
+        flash[:notice] = "Nested Collection has been created."
+        redirect_to @collection.root
+      else
+        flash[:alert] = "Nested Collection has not been created."
+        render 'new'
+      end
     else
-      flash[:alert] = "Collection has not been updated."
-      render "edit"
+      if @collection.update_attributes(params[:collection])
+        flash[:notice] = "Collection has been updated."
+        redirect_to @collection
+      else
+        flash[:alert] = "Collection has not been updated."
+        render "edit"
+      end
     end
   end
 
