@@ -4,6 +4,7 @@ gem 'rails',              '3.2.13'
 gem 'sqlite3'
 gem 'jquery-rails'
 gem 'dynamic_form',       '1.1.4'
+gem 'ancestry'
 
 
 # Gems used only for assets and not required

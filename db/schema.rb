@@ -11,14 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130411180328) do
+ActiveRecord::Schema.define(:version => 20130411233837) do
 
   create_table "collections", :force => true do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "ancestry"
   end
+
+  add_index "collections", ["ancestry"], :name => "index_collections_on_ancestry"
 
   create_table "entries", :force => true do |t|
     t.integer  "total"

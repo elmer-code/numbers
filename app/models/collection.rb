@@ -3,5 +3,6 @@ class Collection < ActiveRecord::Base
 
   validates :name, presence: true
 
-  has_many :entries
+  has_ancestry
+  has_many :entries, dependent: :destroy
 end
