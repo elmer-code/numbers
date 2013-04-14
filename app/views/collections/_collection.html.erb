@@ -1,5 +1,6 @@
 <div>
   <%= collection.name %>
+  <span class="collection_number"><%= collection.number %></span>
 
   <%= form_for [collection, collection.entries.build] do |f| %>
     <%= f.error_messages %>

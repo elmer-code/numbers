@@ -11,6 +11,9 @@ feature "Creating Entries - " do
     fill_in "entry_total", with: "1"
     click_button "Update Total"
     page.should have_content("Total updated.")
+    within('.collection_number') do
+      page.should have_content("1")
+    end
     page.should have_content("1");
   end
 

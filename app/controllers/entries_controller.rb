@@ -8,6 +8,9 @@ class EntriesController < ApplicationController
   def create
     @entry = @collection.entries.build(params[:entry])
     if @entry.save
+
+      @entry.collection.update_number!
+
       flash[:notice] = "Total updated."
       redirect_to @collection.root
     else
