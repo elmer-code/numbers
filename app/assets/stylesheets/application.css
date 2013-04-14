@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+
+.nested_collections {
+  margin-left: 30px;
+}
+
+.nested_collections .nested_collections .nested_collections {
+  margin-left: 0px;
+}

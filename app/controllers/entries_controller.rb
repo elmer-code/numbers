@@ -6,19 +6,12 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @current_total = nil
-    if @collection.entries.present?
-      @current_total = @collection.entries.last.total
-      @entries = @collection.entries
-      @last_entry_index = @entries.count - 1
-    end
-
     @entry = @collection.entries.build(params[:entry])
     if @entry.save
       flash[:notice] = "Total updated."
-      redirect_to @collection
+      redirect_to @collection.root
     else
-      flash[:alert] = "Total not updated."
+      flash.now[:alert] = "Total not updated."
       render 'collections/show'
     end
   end

@@ -1,0 +1,34 @@
+<div>
+  <%= collection.name %>
+
+  <%= form_for [collection, collection.entries.build] do |f| %>
+    <%= f.error_messages %>
+    <%= f.text_field :total %> <%= f.submit "Update Total" %>
+  <% end %>
+
+  <div>
+    <% if collection.entries.count > 0 %>
+      <% 0.upto(collection.entries.count - 1) do |i| %>
+        <div>
+          <%= collection.entries[i].total %> - <%= collection.entries[i].updated_at %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+<!--   <%= form_for(collection) do |f| %>
+    <%= f.error_messages %>
+    <%= f.text_field :name, value: "Nested Collection Name" %>
+    <%= f.label :name %><br>
+    <%= f.text_field :description, value: "" %> <%= f.label :description %><br />
+    <%= f.submit "Add Nested Collection" %>
+  <% end %> -->
+
+  <%= form_for(Collection.new) do |f| %>
+    <%= f.error_messages %>
+    <%= f.hidden_field :parent_id, value: "#{collection.id}" %>
+    <%= f.text_field :name, id: "Nested in #{collection.name.squish.tr(" ", "_")}"  %>
+    <%= f.label :name %><br>
+    <%= f.submit "Add Collection inside #{collection.name.squish.tr(" ", "-")}" %>
+  <% end %>
+</div>

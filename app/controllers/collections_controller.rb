@@ -15,39 +15,38 @@ class CollectionsController < ApplicationController
     @collection = Collection.new(params[:collection])
     if @collection.save
       flash[:notice] = "Collection has been created."
-      redirect_to @collection
+      redirect_to @collection.root # when using xhr, .root can be removed
     else
-      flash[:alert] = "Collection has not been created."
+      flash.now[:alert] = "Collection has not been created."
       render 'new'
     end
   end
 
   def show
-    @entries = @collection.entries
-    @entry = @collection.entries.build
   end
 
   def edit
   end
 
   def update
-    if params[:commit] == "Add Nested Collection"
-      @new_nested_collection = @collection.children.build(params[:collection])
-      if @new_nested_collection.save
-        flash[:notice] = "Nested Collection has been created."
-        redirect_to @collection.root
-      else
-        flash[:alert] = "Nested Collection has not been created."
-        render 'new'
-      end
+    # if params[:commit] == "Add Nested Collection"
+    #   @new_nested_collection = @collection.children.build(params[:collection])
+    #   if @new_nested_collection.save
+    #     flash[:notice] = "Nested Collection has been created."
+    #     redirect_to @collection.root
+    #   else
+    #     @collection = @new_nested_collection
+    #     flash.now[:alert] = "Nested Collection has not been created."
+    #     render 'new'
+    #   end
+    # else
+
+    if @collection.update_attributes(params[:collection])
+      flash[:notice] = "Collection has been updated."
+      redirect_to @collection
     else
-      if @collection.update_attributes(params[:collection])
-        flash[:notice] = "Collection has been updated."
-        redirect_to @collection
-      else
-        flash[:alert] = "Collection has not been updated."
-        render "edit"
-      end
+      flash.now[:alert] = "Collection has not been updated."
+      render "edit"
     end
   end
 
