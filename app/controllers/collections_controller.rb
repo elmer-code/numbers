@@ -29,18 +29,6 @@ class CollectionsController < ApplicationController
   end
 
   def update
-    # if params[:commit] == "Add Nested Collection"
-    #   @new_nested_collection = @collection.children.build(params[:collection])
-    #   if @new_nested_collection.save
-    #     flash[:notice] = "Nested Collection has been created."
-    #     redirect_to @collection.root
-    #   else
-    #     @collection = @new_nested_collection
-    #     flash.now[:alert] = "Nested Collection has not been created."
-    #     render 'new'
-    #   end
-    # else
-
     if @collection.update_attributes(params[:collection])
       flash[:notice] = "Collection has been updated."
       redirect_to @collection

@@ -17,14 +17,6 @@
     <% end %>
   </div>
 
-<!--   <%= form_for(collection) do |f| %>
-    <%= f.error_messages %>
-    <%= f.text_field :name, value: "Nested Collection Name" %>
-    <%= f.label :name %><br>
-    <%= f.text_field :description, value: "" %> <%= f.label :description %><br />
-    <%= f.submit "Add Nested Collection" %>
-  <% end %> -->
-
   <%= form_for(Collection.new) do |f| %>
     <%= f.error_messages %>
     <%= f.hidden_field :parent_id, value: "#{collection.id}" %>
