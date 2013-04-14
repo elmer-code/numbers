@@ -4,7 +4,7 @@
 
   <%= form_for [collection, collection.entries.build] do |f| %>
     <%= f.error_messages %>
-    <%= f.text_field :total %> <%= f.submit "Update Total" %>
+    <%= f.text_field :total, id: "uncategorized_total_#{collection.name.squish.tr(" ", "_")}" %> <%= f.submit "Update uncategorized total #{collection.name.squish.tr(" ", "_")}" %>
   <% end %>
 
   <div>

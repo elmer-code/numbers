@@ -7,9 +7,19 @@ class Collection < ActiveRecord::Base
   has_many :entries, dependent: :destroy
 
   def update_number!
+    change = 0;
     if entries.count == 1
-      self.number = entries.last.total
-      self.save
+      change = entries.last.total
+    else
+      # calculate the difference needed to update ancestors.
+      change = entries[-1].total - entries[-2].total
+    end
+    self.number = entries.last.total
+    self.save
+
+    self.ancestors.each do |collection|
+      collection.number = collection.number + change
+      collection.save
     end
   end
 end
