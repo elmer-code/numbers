@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails',              '3.2.13'
-gem 'sqlite3'
 gem 'jquery-rails'
 gem 'dynamic_form',       '1.1.4'
 gem 'ancestry'
@@ -16,6 +15,7 @@ group :assets do
 end
 
 group :test, :development do
+  gem 'sqlite3'
   gem 'rspec-rails',      '~> 2.11'
   gem 'pry-rails'
   gem 'pry-doc'
