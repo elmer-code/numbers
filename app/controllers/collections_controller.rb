@@ -1,8 +1,6 @@
 class CollectionsController < ApplicationController
   before_filter :find_collection, only: [:show, :edit, :update, :destroy]
 
-
-
   def index
     @collections = Collection.where(ancestry: nil)
   end
