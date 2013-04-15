@@ -31,7 +31,7 @@ class CollectionsController < ApplicationController
   def update
     if @collection.update_attributes(params[:collection])
       flash[:notice] = "Collection has been updated."
-      redirect_to @collection
+      redirect_to @collection.root
     else
       flash.now[:alert] = "Collection has not been updated."
       render "edit"

@@ -27,13 +27,13 @@
         <table>
           <tr>
             <th>Uncategorized #</th>
-            <th>Date</th>
+            <th>Entry Date</th>
           </tr>
           <% (collection.entries.count - 1).downto(0) do |i| %>
             <tr>
             <div>
               <td><%= collection.entries[i].total %></td>
-              <td><%= collection.entries[i].updated_at %></td>
+              <td><%= collection.entries[i].updated_at.strftime("%Y-%m-%d") %></td>
             </div>
             </tr>
           <% end %>
