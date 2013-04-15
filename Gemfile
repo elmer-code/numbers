@@ -27,3 +27,7 @@ group :test do
   gem 'launchy'
   gem 'factory_girl',     '2.6.4'
 end
+
+group :production do
+  gem 'pg',               '0.12.2'
+end
