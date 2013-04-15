@@ -1,9 +1,3 @@
-<%= link_to "Edit Collection",
-            edit_collection_path(@collection) %>
-
-<%= link_to "Delete Collection",
-            collection_path(@collection),
-            method: :delete,
-            confirm: "Delete this Collection?" %>
+<%= link_to "All Collections", collections_path %>
 
 <%= nested_collections @collection.subtree.arrange(order: :created_at) %>

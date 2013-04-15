@@ -4,7 +4,7 @@ class CollectionsController < ApplicationController
 
 
   def index
-    @collections = Collection.all
+    @collections = Collection.where(ancestry: nil)
   end
 
   def new
@@ -39,9 +39,17 @@ class CollectionsController < ApplicationController
   end
 
   def destroy
+    parent_id = @collection.parent_id
+
+    @collection.update_ancestors_numbers!(-@collection.number)
     @collection.destroy
     flash[:notice] = "Collection has been deleted."
-    redirect_to collections_path
+
+    if parent_id == nil
+      redirect_to collections_path
+    else
+      redirect_to Collection.find(parent_id).root
+    end
   end
 
   private

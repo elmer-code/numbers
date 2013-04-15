@@ -1,5 +1,5 @@
 class Collection < ActiveRecord::Base
-  attr_accessible :description, :name, :number, :parent_id
+  attr_accessible :description, :name, :parent_id
 
   validates :name, presence: true
 
@@ -17,6 +17,10 @@ class Collection < ActiveRecord::Base
     self.number = entries.last.total
     self.save
 
+    update_ancestors_numbers!(change)
+  end
+
+  def update_ancestors_numbers!(change)
     self.ancestors.each do |collection|
       collection.number = collection.number + change
       collection.save

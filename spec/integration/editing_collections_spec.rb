@@ -5,7 +5,7 @@ feature "Editing Collections - " do
     FactoryGirl.create(:collection, name: "Stuff")
     visit '/'
     click_link "Stuff"
-    click_link "Edit Collection"
+    click_link "Edit Stuff"
   end
 
   scenario "Updating a Collection with valid data" do

@@ -8,9 +8,146 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require_tree .
+ *= require_self
  */
+
+.clearfix:before,
+.clearfix:after {
+  content:    ".";
+  display:    block;
+  height:     0;
+  overflow:   hidden;
+}
+.clearfix:after {
+  clear:      both;
+}
+
+.clearfix {
+  zoom: 1; // IE < 8
+}
+
+/**/
+
+body {
+    background-color: #222;
+    color:          #ccc;
+    font-family:    helvetica, arial, sans-serif;
+    font-size:      14px;
+    line-height:    22px;
+    text-rendering: optimizeLegibility;
+}
+
+a {
+    color:              #333;
+    text-decoration:    none;
+}
+
+a:hover {
+    color:          grey;
+}
+
+h1 {
+  font-size:        28px;
+  font-weight:      bold;
+  line-height:      56px;
+}
+
+h2 {
+  font-weight:      bold;
+  text-transform:   uppercase;
+}
+
+input {
+  height:     18px;
+  margin-right: 10px;
+  width:      150px;
+}
+
+#wrapper {
+  margin:     20px 0px 0px 20px;
+  padding:    20px 20px 0px 20px;
+}
+
+header {
+    margin:         0px 0px 60px 0px;
+    font-size:    16px;
+    text-transform: uppercase;
+}
+
+ul {
+  list-style-type:  none;
+}
+
+  li + li {
+    margin-top:   16px;
+  }
+
+table {
+  text-align:     left;
+}
+
+  td {
+    width:        170px;
+  }
+
+.nav-link {
+  font-size:      30px;
+  line-height:    1em;
+  letter-spacing:   -1px;
+  text-transform:   uppercase;
+}
+
+.nav-description {
+  font-size:      16px;
+  line-height:    20px;
+  text-transform:   uppercase;
+}
+
+#index_collections {
+  margin-top:      44px;
+}
+
+#index_collections a {
+    color:              #ccc;
+    text-decoration:    none;
+}
+
+#index_collections a:hover {
+    color:          #fff;
+}
+
+.collection {
+  margin-bottom:  44px;
+  width:          340px;
+}
+
+.collection_number {
+  float:          left;
+  font-size:      72px;
+  line-height:    60px;
+}
+
+.collection_info {
+  float:          left;
+  margin-left:    10px;
+}
+
+  .collection_name {
+    font-size:      21px;
+    font-weight:    bold;
+  }
+
+.entries_area {
+  border-top:     1px solid #ccc;
+  border-bottom:  1px solid #ccc;
+  margin:         11px 0;
+  padding:        12px 0;
+}
+
+  .entries_history {
+    margin:       12px 0;
+  }
 
 .nested_collections {
   margin-left: 30px;

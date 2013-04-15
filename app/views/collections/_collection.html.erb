@@ -1,27 +1,51 @@
-<div>
-  <%= collection.name %>
-  <span class="collection_number"><%= collection.number %></span>
+<div class="collection">
+  <%= link_to "Edit #{collection.name}",
+              edit_collection_path(collection) %>
 
-  <%= form_for [collection, collection.entries.build] do |f| %>
-    <%= f.error_messages %>
-    <%= f.text_field :total, id: "uncategorized_total_#{collection.name.squish.tr(" ", "_")}" %> <%= f.submit "Update uncategorized total #{collection.name.squish.tr(" ", "_")}" %>
-  <% end %>
+  <%= link_to "Delete #{collection.name}",
+              collection_path(collection),
+              method: :delete,
+              confirm: "Delete this Collection?" %>
 
-  <div>
-    <% if collection.entries.count > 0 %>
-      <% 0.upto(collection.entries.count - 1) do |i| %>
-        <div>
-          <%= collection.entries[i].total %> - <%= collection.entries[i].updated_at %>
-        </div>
-      <% end %>
+  <div class="clearfix">
+    <div class="collection_number"><%= collection.number %></div>
+    <div class="collection_info">
+      <div class="collection_name"><%= collection.name %></div>
+      <div class="collection_description"><%= collection.description %></div>
+    </div>
+  </div>
+
+  <div class="entries_area">
+    <%= form_for [collection, collection.entries.build] do |f| %>
+      <%= f.error_messages %>
+      <%= f.text_field :total, id: "uncategorized_total_#{collection.name.squish.tr(" ", "_")}" %>
+      <%= f.submit "Update uncategorized total #{collection.name.squish.tr(" ", "_")}" %>
     <% end %>
+
+    <div class="entries_history">
+      <% if collection.entries.count > 0 %>
+        <table>
+          <tr>
+            <th>Uncategorized #</th>
+            <th>Date</th>
+          </tr>
+          <% (collection.entries.count - 1).downto(0) do |i| %>
+            <tr>
+            <div>
+              <td><%= collection.entries[i].total %></td>
+              <td><%= collection.entries[i].updated_at %></td>
+            </div>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+    </div>
   </div>
 
   <%= form_for(Collection.new) do |f| %>
     <%= f.error_messages %>
     <%= f.hidden_field :parent_id, value: "#{collection.id}" %>
     <%= f.text_field :name, id: "Nested in #{collection.name.squish.tr(" ", "_")}"  %>
-    <%= f.label :name %><br>
     <%= f.submit "Add Collection inside #{collection.name.squish.tr(" ", "-")}" %>
   <% end %>
 </div>

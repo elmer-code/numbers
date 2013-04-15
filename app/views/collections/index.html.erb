@@ -1,8 +1,20 @@
-<%= link_to "New Collection", new_collection_path %>
+<h1>What's your number?</h1>
 
-<h2>Collections</h2>
-<ul>
+<h2>Root Collections</h2>
+
+<ul id="index_collections">
+  <li><%= link_to "New Collection", new_collection_path %></li>
   <% @collections.each do |collection| %>
-    <li><%= link_to collection.name, collection %></li>
+    <li>
+      <a href="<%= collection_path(collection) %>">
+        <div class="clearfix">
+          <div class="collection_number"><%= collection.number %></div>
+          <div class="collection_info">
+            <div class="collection_name"><%= collection.name %></div>
+            <div class="collection_description"><%= collection.description %></div>
+          </div>
+        </div>
+      </a>
+    </li>
   <% end %>
 </ul>
